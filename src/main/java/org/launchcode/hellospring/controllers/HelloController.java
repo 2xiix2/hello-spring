@@ -72,16 +72,8 @@ public class HelloController {
     }
 
     @GetMapping("form")
-    @ResponseBody
     public String helloForm() {
-        return "<html>" +
-                "<body>" +
-                "<form action= 'hello' method= 'post'>" + // <--- this tells it to submit a request to "/hello"
-                "<input type='text' name='name'>" + //<--- already has a handler method that dynamically creates request with the query parameter called "name"
-                "<input type='submit' value='Greet me!'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+       return "form";
     }
 
 
