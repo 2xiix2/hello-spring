@@ -1,6 +1,7 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -58,15 +59,14 @@ public class HelloController {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
     //Submit a form via a POST Request
 
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "hello")
-    @ResponseBody
-    // @RequestParam annotation flags this as a "special method parameter" to Spring Boot
-    public String helloWithQueryParam(@RequestParam String name) {
-        return "Hello, " + name + "!"; //This makes this a dynamic response
+    @RequestMapping(value = "hello", method = {RequestMethod.GET, RequestMethod.POST}) // @RequestParam annotation flags this as a "special method parameter" to Spring Boot
+    public String helloWithQueryParam(@RequestParam String name, Model model) {
+        String greeting = "Hello, " + name + "!";
+        model.addAttribute("greeting", greeting);
+        return "hello";
     }
 
     @GetMapping("hello/{name}") // {name} <--- is call a PATH PARAMETER --->  Gets a piece of data in the path
-    @ResponseBody
     public String helloWithPathParam(@PathVariable String name) {
         return "Hello, " + name + "!";
     }
